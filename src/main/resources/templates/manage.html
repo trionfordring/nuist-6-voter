@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>manage</title>
+</head>
+<body>
+<h2>管理界面</h2>
+<h3>
+    <a th:href="@{/manage/addUser}"><button>添加用户</button></a>
+    <a th:href="@{/manage/deleteAllUsers}"><button>删除所有默认名称用户</button></a>
+    <a th:href="@{/logout}"><button>退出登录</button></a>
+</h3>
+批量生成用户：<br/>
+<form action="/manage/createUsers">
+    <div style="border-style: inset;width: fit-content">
+    <h4>
+        用户数量：<input name="userNumber" type="number" required/>
+        password长度：<input name="pwdLength" type="number" value="6"/>
+        <input type="submit" value="生成"/>
+    </h4>
+    </div>
+</form>
+
+<table border="1">
+    <tr>
+        <th>序号</th>
+        <th>id</th>
+        <th>name</th>
+        <th>password</th>
+        <th>state</th>
+        <th>管理用户</th>
+    </tr>
+    <tr th:each="user,state : ${list}">
+        <th th:text="${state.count}"></th>
+        <th th:text="${user.getId()}"></th>
+        <th th:text="${user.getName()}"></th>
+        <th th:text="${user.getPassword()}"></th>
+        <th th:text="${user.getState()}"></th>
+        <th>
+            <a th:href="@{/manage/user/{uid}(uid=${user.getId().toString()})}"><button>管理</button></a>
+        </th>
+    </tr>
+</table>
+<h2>vote list:</h2>
+<table border="1">
+    <tr>
+        <th>id</th>
+        <th>图片</th>
+        <th>票数</th>
+        <th><a href="">清空</a></th>
+    </tr>
+    <tr th:each="image:${imageList}">
+        <th th:text="${image.getId()}"></th>
+        <th>
+            <img style="max-height: 300px" th:src="@{/images/{name}(name=${image.getName()})}">
+        </th>
+        <th th:text="${image.getUsers().size()}"></th>
+        <th><a th:href="@{/manage/delete/image/{id}(id=${image.getId()})}"><button>删除</button></a></th>
+    </tr>
+</table>
+</body>
+</html>

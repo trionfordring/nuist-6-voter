@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>vote</title>
+</head>
+<body>
+<div style="border-style: inset;width: fit-content">
+    <form action="/update" method="post" enctype="multipart/form-data">
+        上传图片：
+        <input type="file" name="images" accept="image/*" multiple="multiple"><br/>
+        <input type="submit">
+    </form>
+</div>
+<div style="border-style: inset;width: fit-content">
+    <form action="/vote/submit">
+        <h2>投票处：</h2>
+        <table>
+            <tr th:each="image:${ImageList}">
+                <th>
+                    <input type="checkbox" name="voteList" th:value="${image.getId()}">
+                    <img style="max-height: 300px" th:src="@{/images/{name}(name=${image.getName()})}">
+                </th>
+            </tr>
+        </table>
+        <input type="submit">
+    </form>
+</div>
+<a th:href="@{/logout}"><button>退出登录</button></a>
+</body>
+</html>

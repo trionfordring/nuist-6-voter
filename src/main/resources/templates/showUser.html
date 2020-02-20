@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${show.getName()}">user</title>
+</head>
+<body>
+<div style="border-style: inset;width: fit-content">
+    <table>
+        <tr>
+            <th>id</th>
+            <th><input type="text" th:value="${show.getId()}"/>
+        </tr>
+        <tr>
+            <th>name</th>
+            <th><input type="text" th:value="${show.getName()}"/></th>
+        </tr>
+        <tr>
+            <th>password</th>
+            <th><input type="text" th:value="${show.getPassword()}"></th>
+        </tr>
+        <tr>
+            <th>state</th>
+            <th><input type="text" th:value="${show.getState().toString()}"></th>
+        </tr>
+    </table>
+</div>
+</body>
+</html>
